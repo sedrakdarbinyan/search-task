@@ -1,0 +1,35 @@
+<div class="search-container">
+  <input [formControl]="searchControl" placeholder="Search countries..." />
+  <div class="error">{{ error }}</div>
+  @if (error) {} @if (results.length) {
+  <div class="results">
+    <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+      <div *cdkVirtualFor="let result of results">
+        <h3>{{ result.name.common }}</h3>
+        <p>Population: {{ result.population }}</p>
+        <p>Region: {{ result.region }}</p>
+      </div>
+    </cdk-virtual-scroll-viewport>
+    <!-- @for (country of results; track $index) {
+    <div class="country">
+      <h3>{{ country.name.common }}</h3>
+      <p>Population: {{ country.population }}</p>
+      <p>Region: {{ country.region }}</p>
+    </div>
+    } -->
+  </div>
+  } @if(searchHistory.length){
+  <div class="history">
+    <h4>Search History</h4>
+    <ul>
+      <cdk-virtual-scroll-viewport itemSize="50" class="  ">
+        <div *cdkVirtualFor="let entry of searchHistory">
+          <li (click)="loadPreviousSearch(entry)">
+            {{ entry.query }}
+          </li>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </ul>
+  </div>
+  }
+</div>
